@@ -1,0 +1,76 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Lenevo",
+            "image": "images/laptop1.jpg",
+            "price": "54999.00"
+        },
+        {
+            "id": 2,
+            "name": "Dell",
+            "image": "images/laptop2.jpg",
+            "price": "62000.00"
+        },
+        {
+            "id": 3,
+            "name": "Vivo Notebook",
+            "image": "images/laptop3.jpg",
+            "price": "40399.00"
+        },
+        {
+            "id": 4,
+            "name": "Acer",
+            "image": "images/laptop4.jpg",
+            "price": "58000.00"
+        },
+        {
+            "id": 5,
+            "name": "HP",
+            "image": "images/laptop5.jpg",
+            "price": "67999.00"
+        },
+        {
+            "id": 6,
+            "name": "Xiaomi",
+            "image": "images/laptop1.jpg",
+            "price": "46000.00"
+        },
+        {
+            "id": 7,
+            "name": "Lenevo",
+            "image": "images/laptop5.jpg",
+            "price": "50000.00"
+        },
+        {
+            "id": 8,
+            "name": "Dell",
+            "image": "images/laptop2.jpg",
+            "price": "97999.00"
+        },
+        {
+            "id": 9,
+            "name": "HP",
+            "image": "images/laptop1.jpg",
+            "price": "72999.00"
+        },
+        {
+            "id": 10,
+            "name": "Asus",
+            "image": "images/laptop3.jpg",
+            "price": "64444.00"
+        },
+        {
+            "id": 11,
+            "name": "Apple",
+            "image": "images/laptop4.jpg",
+            "price": "99999.00"
+        },
+        {
+            "id": 12,
+            "name": "HP",
+            "image": "images/laptop5.jpg",
+            "price": "70000.00"
+        }
+    ]
+}

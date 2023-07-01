@@ -1,50 +1,66 @@
-import React, { useEffect, useState } from "react"
-import {Container, Col, Row } from 'reactstrap'
-import axios from "axios"
+import React, { useEffect, useState } from "react";
+import { Container, Col, Row, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import axios from "axios";
 
-import ItemCard from "./ItemCard"
+import ItemCard from "./ItemCard";
 
-const Product = ({addInCart}) => {
+const Product = ({ addInCart }) => {
+  const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
-    const [products, setProduct] = useState([])
+  const getProduct = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_PRODUCT_API}`);
 
-    const getProduct = async () => {
-        const {data} = await axios.get(`${process.env.REACT_APP_PRODUCT_API}`);
+    const allProdDetail = data.map((item) => ({
+      id: item.id,
+      productName: item.name,
+      productPrice: item.price,
+      productImage: item.image,
+    }));
 
-        const allProdDetail = data.map(item => (
-            {
-                id: item.id,
-                productName: item.name,
-                productPrice: item.price,
-                productImage: item.image
-            }
-        ))
+    setProducts(allProdDetail);
+  };
 
-        setProduct(allProdDetail)
-    }
+  useEffect(() => {
+    getProduct();
+    // eslint-disable-next-line
+  }, []);
 
-    useEffect(() => {
-        getProduct()
-    // eslint-disable-next-line 
-    }, [])
+  // Pagination logic
+  const itemsPerPage = 6;
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
 
-    return (
-        <>
-            <Container fluid>
-                <Row>
-                    {products.map(product => (
-                        <Col md={4} key={product.id}>
-                                {/* <img src={product.productImage} alt="" height="150" width="150" />
-                                <h6>{product.productName}</h6>
-                                <h6>Rs.{product.productPrice}</h6>
-                                <button>Buy Now</button> */}
-                                <ItemCard product={product} addIntoCart={addInCart}/>
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
-        </>
-    )
-}
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-export default Product
+  return (
+    <>
+      <Container fluid>
+        <Row>
+          {currentItems.map((product) => (
+            <Col md={4} key={product.id}>
+              <ItemCard product={product} addIntoCart={addInCart} />
+            </Col>
+          ))}
+        </Row>
+        <div style={{ display: "flex", justifyContent: "center"}}>
+        <Pagination>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <PaginationItem key={index} active={index + 1 === currentPage}> 
+              <PaginationLink onClick={() => handlePageClick(index + 1)}>
+                {index + 1}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+        </Pagination>
+        </div>
+      </Container>
+    </>
+  );
+};
+
+export default Product;
